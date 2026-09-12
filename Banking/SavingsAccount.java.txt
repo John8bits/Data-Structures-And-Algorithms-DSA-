@@ -1,0 +1,18 @@
+package dsaAct;
+
+public class SavingsAccount extends BankAccount {
+	
+	double interestRate;
+	
+	//Constructor
+	 public SavingsAccount(double balance) {
+		super(balance);	//call attribute from superclass
+	}
+	
+	public void addInterest() {		
+		double interest=getBalance()*interestRate/100;
+		Deposit(interest);
+	}
+	
+
+}
