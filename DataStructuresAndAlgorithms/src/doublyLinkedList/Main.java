@@ -1,0 +1,273 @@
+package doublyLinkedList;
+
+import java.util.*;
+
+//import Stack.DoublyLinkedList;
+
+public class Main {
+	
+	static Scanner scan = new Scanner(System.in);
+	
+	public static void main(String[] args) {
+/*          
+		System.out.println("\t--- PROBLEM 1 ---\n");
+    	Problem1();
+                
+    	System.out.println("\n\n\t--- PROBLEM 2 ---\n");
+		Problem2();
+*/
+		
+		/*DSA_ACT dsa = new DSA_ACT();
+		dsa.ArrayManipulation();
+		*/
+		
+		/*LinkedList <Integer>l = new LinkedList<>();
+		l.add(6);*/
+		
+		DoublyLinkedList dl = new DoublyLinkedList();
+		dl.insertItem(4);
+		dl.insertItem(5);
+		dl.insertItem(6);
+		dl.insertItem(7);
+		
+		dl.printForward();
+		
+		
+		dl.printReverse();
+		
+			
+		
+		
+		
+	}
+	
+	//PROBLEM 1
+	static void Problem1(){
+	       
+        //Example 1:
+        System.out.println("Example 1: ");
+        
+        int num[] = {12,4,6,2,1,9,8,6,90,-11,15,16,21,31,5};
+        int smallOdd= num[0];
+        
+        for(int i=0; i<num.length; i++){         
+        
+            if(num[i]%2==1 || num[i]<smallOdd){            
+            
+               if(smallOdd>num[i]) smallOdd = num[i];
+                                           
+            }      
+                 
+        }
+        System.out.println("Smallest Odd number is: "+smallOdd);
+        
+        
+        //Example 2:
+        System.out.println("\nExample 2: ");
+        
+        int num2[] = {12,4,6,2,9,8,6,90,11,15,16,21,3,31,5};
+        int smallOdd2= num2[0];
+        
+        for(int i=0; i<num2.length; i++){         
+          
+              if(num2[i]%2==1){            
+            
+                if(smallOdd2>num2[i]){
+                    smallOdd2 = num2[i];
+                }                           
+                
+            }    
+                   
+        }
+        System.out.println("Smallest Odd number is: "+smallOdd2);
+      
+    }
+	
+	
+	
+	//PROBLEM 2 
+    static void Problem2() {
+        
+        int matrixVal1[] = new int[9];
+        int matrixVal2[] = new int[9];
+        int matrixVal3[] = new int[9];
+
+        // INPUT MATRIX 1
+        boolean Invalid = true;
+        System.out.println("Enter values for Matrix 1: ");
+        
+        for (int i = 0; i < matrixVal1.length; i++) {
+            
+        	while(Invalid) {
+        		
+	            try{
+	            	
+	            System.out.printf("Value %d: ", (i + 1));
+	            matrixVal1[i] = Integer.parseInt(scan.nextLine());
+	            
+		            if(matrixVal1[i]>=0 || matrixVal1[i]<0) {
+		            	i++;
+		            	
+		            	if(i==matrixVal1.length)break;
+		            	
+		            }
+	            
+	            }catch(NumberFormatException err){
+	            	
+	            	Invalid = true;
+	                System.out.println("\n "+err+ "\n");
+	            }
+            
+        	}
+            
+            
+        }
+
+        // INPUT MATRIX 2
+        System.out.println("\nEnter values for Matrix 2: ");
+        
+        for (int i = 0; i < matrixVal2.length; i++) {
+            
+        	while(Invalid) {
+        		
+	        	try {
+	        		
+		            System.out.printf("Value %d: ", (i + 1));
+		            matrixVal2[i] = Integer.parseInt(scan.nextLine());
+		            
+		            if(matrixVal2[i]>=0 || matrixVal2[i]<0) {
+		            	i++;
+		            	
+		            	if(i==matrixVal2.length)break;
+		            	
+		            }
+		            
+		            
+	        	}catch(NumberFormatException err) {
+	        		Invalid= true;
+	        		System.out.println("\n "+err +"\n");
+	        	}
+        	
+        	}
+        }
+
+        // INPUT MATRIX 3
+        System.out.println("\nEnter values for Matrix 3: ");
+        
+        for (int i = 0; i < matrixVal3.length; i++) {
+            
+        	while(Invalid) {
+        		
+	        	try {
+
+		            System.out.printf("Value %d: ", (i + 1));
+		            matrixVal3[i] = Integer.parseInt(scan.nextLine());
+		            
+		            if(matrixVal3[i]>=0 || matrixVal3[i]<0) {
+		            	i++;
+		            	
+		            	if(i==matrixVal3.length)break;
+		            	
+		            }
+		            
+	        	}catch(NumberFormatException err) {
+	        		Invalid= true;
+	        		System.out.println("\n "+err +"\n");
+	        	}
+	        	
+         }
+        }
+
+        // DISPLAY MATRICES
+        System.out.println("\n   ORIGINAL MATRICES");
+
+        System.out.println("\n      MATRIX 1\n");
+        
+        for (int m1 = 0; m1 < matrixVal1.length; m1++) {
+
+            System.out.printf("%5d", matrixVal1[m1]);
+            
+            if ((m1 + 1) % 3 == 0) System.out.println();
+            
+        }
+
+        System.out.println("\n     MATRIX 2\n");
+        
+        for (int m2 = 0; m2 < matrixVal2.length; m2++) {
+            
+            System.out.printf("%5d", matrixVal2[m2]);
+            
+            if ((m2 + 1) % 3 == 0) System.out.println();
+            
+        }
+
+        System.out.println("\n      MATRIX 3\n");
+        
+        for (int m3 = 0; m3 < matrixVal3.length; m3++) {
+            
+            System.out.printf("%5d", matrixVal3[m3]);
+            
+            if ((m3 + 1) % 3 == 0) System.out.println();
+            
+        }
+
+        // CALCULATE MATRIX 1 + MATRIX 2 – MATRIX 3
+        int[][] SumDiff = new int[3][3];
+        
+        //outer loop(rows)
+        for (int row = 0; row < 3; row++) {
+            
+            //inner loop(columns)
+            for (int col = 0; col < 3; col++) {
+                
+                //Since im using 1D Array, use this formula to get index                      
+                int index = row * 3 + col;                        
+                SumDiff[row][col] = matrixVal1[index] + matrixVal2[index] - matrixVal3[index];
+           
+             }
+             
+        }
+
+        // DISPLAY RESULT (Calculate Matrix)
+        System.out.println("\n    MATRIX 1 + MATRIX 2 - MATRIX 3\n");
+        
+        for (int row = 0; row < 3; row++) {
+            
+            for (int col = 0; col < 3; col++) {
+                
+                System.out.printf("%5d", SumDiff[row][col]);
+         
+              }
+            
+            System.out.println();
+        }
+        
+        int DiagSum1=0,DiagSum2=0, DiagSum3=0;
+                
+        for (int s = 0; s < 3; s++) {
+            
+            //DiagSum1 = DiagSum1+matrixVal1[s*3 + s]; 
+             DiagSum1  += matrixVal1[s * 3 + s]; 
+             
+        }                                                                                                                                                 
+        System.out.println("\nSum of Diagonal (Matrix 1) : "+ DiagSum1);
+        
+        for (int s2 = 0; s2 < 3; s2++) {
+            
+             DiagSum2  += matrixVal2[s2 * 3 + s2]; 
+             
+        }      
+        System.out.println("Sum of Diagonal (Matrix 2) : "+DiagSum2);
+     
+        for (int s3 = 0; s3 < 3; s3++) {
+
+             DiagSum3  += matrixVal3[s3 * 3 + s3]; 
+             
+        }      
+        System.out.println("Sum of Diagonal (Matrix 3) : "+ DiagSum3);
+        
+        //Close scanner if input is done
+        scan.close();
+
+  }	
+}
