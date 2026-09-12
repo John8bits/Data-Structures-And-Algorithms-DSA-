@@ -1,0 +1,214 @@
+package dsaAct;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		Scanner s = new Scanner(System.in);
+		System.out.println("\t\u001B[44;37m--- BANK ACCOUNT SIMULATION ---\u001B[0m\n");
+		
+	
+		//Class Instances 
+		SavingsAccount savings = new SavingsAccount(1000.0);
+		
+		//ANSI CODE for setting colors(Foreground and Background)
+		System.out.printf("\u001B[47;30mCREATED SAVINGS ACCOUNT WITH BALANCE: %s\u001B[0m %n",savings.getBalance());
+		System.out.printf("%nChecking Account Current Balance: %s",savings.getBalance());
+		double depo;
+		
+		while(true) {
+			
+		try {
+			
+		System.out.print("\n\u001B[42;37m>\u001B[0m Enter Amount to deposit from Savings Account: ");
+		savings.Deposit(depo = s.nextDouble());
+		s.nextLine();
+		
+			if(depo>0) {
+				
+				System.out.printf("%nDepositing %.1f into Savings Account...%n",depo);
+				System.out.println("Savings Account Balance: "+savings.getBalance());
+				
+				savings.interestRate = 10; //set interest rate 
+				savings.addInterest();
+				System.out.println("\nAdding "+savings.interestRate + "%"+ " interest to Savings Account...");
+				System.out.printf("\n\u001B[47;30m Savings Account Balance after interest: %s \u001B[0m",savings.getBalance());
+				
+			break;
+			
+			}else {
+				
+				System.out.println("\n\u001B[31mERROR:\u001B[0m It must be greater that zero!");
+				continue;
+			}
+		
+		}catch(InputMismatchException e) {
+			System.out.println("\n\u001B[31mERROR:\u001B[0m Invalid Input!");
+			s.nextLine();
+			continue;
+		}
+		
+		}
+		
+		System.out.println("\n\n\n---------------------------------------------------");
+		
+		//Class Instances 
+		CheckingAccount checkingAcc = new CheckingAccount(500);	
+		System.out.printf("%n%n \u001B[47;30m CREATED CHECKING ACCOUNT WITH BALANCE: %s \u001B[0m %n",checkingAcc.getBalance());
+		
+		double wdraw;
+		
+		System.out.printf("%nChecking Account Current Balance: %s",checkingAcc.getBalance());
+		
+		while(true) {
+			
+			try {
+				
+				System.out.print("\n\n\u001B[42;37m>\u001B[0m Enter Amount to Withdraw from Checking Account: ");
+				checkingAcc.Withdraw(wdraw = s.nextDouble());
+				s.nextLine();
+				
+				if(wdraw<=checkingAcc.getBalance() && wdraw>0) {
+					
+					System.out.printf("%nWithdrawing %s from Checking Account...%n",wdraw);
+					System.out.printf("%n\u001B[47m Checking Account Balance: %s \u001B[0m %n",checkingAcc.getBalance());					
+					break;		
+				
+				}else System.out.println("\nInsufficient Balance!");
+			
+			}catch(InputMismatchException e) {
+				System.out.println("\n\u001B[31mERROR:\u001B[0m Invalid Input!");
+				s.nextLine();
+				continue;
+			}
+			
+		}
+		
+		double depo2,depo3,depo4;
+		
+		//ask again if Exception and negative Input occur
+		while(true) {
+			
+			try {
+				
+				System.out.print("\n\n\u001B[42;37m>\u001B[0m Enter Amount to Deposit from Checking Account: ");
+				checkingAcc.Deposit(depo2 = s.nextDouble());
+				s.nextLine();
+				
+				if(depo2>0 ) {
+
+					System.out.printf("%n%nDepositing %s into Checking Account...%n",depo2);
+					System.out.printf("%n\u001B[47mChecking Account Balance: %s \u001B[0m",checkingAcc.getBalance());
+					break;
+				}else {
+					System.out.println("\n\u001B[31mERROR:\u001B[0m It must be greater that zero!");
+					continue;
+				}
+		
+			}catch(InputMismatchException e) {
+				System.out.println("\n\u001B[31mERROR:\u001B[0m Invalid Input!");
+				s.nextLine();
+				continue;
+			}
+		
+		}
+
+		while(true) {
+			
+			try {
+				
+				System.out.print("\n\n\u001B[42;37m>\u001B[0m Enter Amount to Deposit from Checking Account: ");
+				checkingAcc.Deposit(depo3 = s.nextDouble());
+				s.nextLine();
+				
+				if(depo3>0) {
+					
+					System.out.printf("%n%nDepositing %s into Checking Account...%n",depo3);
+					System.out.printf("%n\u001B[47m Checking Account Balance: %s \u001B[0m ",checkingAcc.getBalance());
+					break;
+				}else { System.out.println("\n\u001B[31mERROR:\u001B[0m It must be greater that zero!"); continue;	}
+				
+			}catch(InputMismatchException e) {
+				
+				System.out.println("\n\u001B[31mERROR:\u001B[0m Invalid Input!");
+				s.nextLine();
+				continue;
+				
+			}
+		
+		
+		}
+		
+	
+		while(true) {
+			
+			try {
+				
+				System.out.print("\n\n\u001B[42;37m>\u001B[0m Enter Amount to Deposit from Checking Account: ");
+				checkingAcc.Deposit(depo4 = s.nextDouble());
+				s.nextLine();
+				
+				if(depo4>0) {
+					
+					System.out.printf("%n%nDepositing %s into Checking Account (4th transaction, Fee Applied)...%n",depo4);
+					checkingAcc.deductFees();
+					
+					System.out.printf("%n\u001B[32mChecking Account Balance: %s \u001B[0m%n",checkingAcc.getBalance());
+					break;
+					
+				}else { System.out.println("\n\u001B[31mERROR:\u001B[0m It must be greater that zero!"); continue; }
+				
+			}catch(InputMismatchException e) {
+				
+				System.out.println("\n\u001B[31mERROR:\u001B[0m Invalid Input!");
+				s.nextLine();
+				continue;
+				
+			}
+		}
+		
+		System.out.println("\n--- Transfer balance from Savings Account to CheckingAccount ---\n");
+		
+		while(true) {
+			
+			try {
+				
+				System.out.print("\n\u001B[42;37m>\u001B[0m Transfer Amount: ");
+				double transAmount = s.nextDouble();
+				
+				System.out.printf("%n%nTransferring %s from savings to checking...",transAmount);
+				
+				if(transAmount>savings.getBalance()) {
+					
+					System.out.println();
+					savings.Transfer(transAmount, checkingAcc);
+					System.out.printf("%n\u001B[31mREASON:\u001B[0m SavingsAccount Balance: %s is less than Transfer Amount: %s",savings.getBalance(),transAmount);
+					break;
+				}else {
+					
+					System.out.println("\n\n\u001B[32mSuccessfully Transfered...\u001B[0m\n");
+					savings.Transfer(transAmount, checkingAcc);
+					s.nextLine();
+					
+					System.out.println("\n\n Savings Account Balance: "+savings.getBalance());
+					System.out.println("Checking Account Balance: "+checkingAcc.getBalance());
+					break;
+				}
+		
+			}catch(InputMismatchException e) {
+				System.out.println("\n\u001B[31mERROR:\u001B[0m Invalid Input!");
+				s.nextLine();
+				continue;	
+			}
+		
+		}
+		
+		s.close(); //close scanner if user input done
+	
+		
+	}
+
+}

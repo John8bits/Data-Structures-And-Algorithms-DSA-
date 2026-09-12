@@ -1,0 +1,50 @@
+package dsaAct;
+
+public class CheckingAccount extends BankAccount{
+	
+	//final means fixed/constant value
+	static final int freeTransact = 3; 
+	static final double transactFee = 2.0;
+	int transactCount;
+	
+	public CheckingAccount(double balance) {
+		super(balance);
+		transactCount=0;
+	}
+	
+	//Overriding Methods
+	@Override
+	public void Deposit(double amount) {
+		
+	    if (amount > 0) {
+	        super.Deposit(amount);
+	        transactCount++;  // Increment transaction count only if the deposit is valid
+	    }
+	    
+	}
+	
+	@Override
+	public void Withdraw(double amount) {
+		super.Withdraw(amount);
+		transactCount++;
+	}
+
+	
+	public void deductFees() {
+			
+		if(transactCount>freeTransact) {
+			
+			double fees = (transactCount - freeTransact)*transactFee;
+			
+			if(balance>=fees ) balance-=fees;
+			else System.out.println("Insufficient balance to deduct fees.");
+			
+		}
+		
+		//reset for next transact
+		//transactCount=0;
+		
+	}
+	
+	
+}

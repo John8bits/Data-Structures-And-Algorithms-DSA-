@@ -1,0 +1,454 @@
+package dsaChall;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class DSA_ACT {
+
+	static Scanner scan = new Scanner(System.in);
+	
+	//count the values inputed by the user
+	static int count= 0;
+	
+	static int values[]= new int[10];
+
+	public static void main(String[] args){	
+			 
+		System.out.println("\u001B[32m     --- MENU ---\u001B[0m\n");
+	    System.out.println("[1] Enter Values \n[2] Find Maximum\n[3] Find Minimum");
+		System.out.println("[4] Calculate Sum \n[5] Search Array");
+		System.out.println("[6] Display values(Forward) \n[7] Display values(Backward) \n[8] Delete Item \n[9] Insert \n[10] Exit\n");
+		
+		String again;
+
+	do{
+			
+		while(true){
+			    
+			try{
+		 
+				 System.out.print("\nEnter your choice: ");
+		         int choice = scan.nextInt();
+		         scan.nextLine();
+		         
+		         if(choice>=1 && choice <=10)
+		         {
+		          
+		          switch(choice){
+				   
+				     case 1: 
+				    	 System.out.println("\n\u001B[32m--- PLEASE INPUT VALUES ---\u001B[0m \n");
+				         InputVal();
+				         break;
+				         
+				     case 2:
+				    	 
+				    	 System.out.println("\n\u001B[32m--- FIND MAXIMUM VALUE ---\u001B[0m \n");
+				    	 FindMax();
+				         break;
+				         
+				     case 3:
+				    	 System.out.println("\n\u001B[32m--- FIND MINIMUM VALUE ---\u001B[0m \n");
+				    	 FindMin();
+				         break;
+				         
+				     case 4:
+				    	 System.out.println("\n\u001B[32m--- CALCULATE SUM ---\u001B[0m \n");
+				         CalculateSum();
+				         break;
+				         
+				     case 5:	
+				           SearchArray();         
+				           break;
+				           
+				     case 6:
+				    	 DisplayValFward();		      
+				         break;
+				         
+				     case 7:
+				         DisplayValBward();
+				         break;
+				         
+				     case 8:
+				    	
+				    	 DeleteValues();
+				         break;
+				         
+				     case 9:
+				    	
+				    	 InsertValues();
+				         break;
+				         
+				     case 10:
+				    	 System.out.println("\nProgram Exit!");
+				         return;
+				      /* default: 
+				    	   System.out.println("\nInvalid input");
+				    	   continue;
+				      */
+				              
+		          }	          
+		             break;          
+		         
+		         }else System.out.println("\nInvalid Input! (1-10 only) \n");
+		               
+	
+			
+			}catch(InputMismatchException e ){
+			    scan.nextLine();
+			    System.out.println("\nERROR: InputMismatchException!\n");
+			}
+			
+		}
+			
+			while(true){
+			    
+			System.out.print("\n\nPick a Choice? (y/n) : ");
+			again= scan.nextLine();
+			
+			    if(again.equalsIgnoreCase("y")) break;
+			    else if(again.equalsIgnoreCase("n")) {
+			        System.out.println("\nProgram End!\n");
+			        break;
+			    }else{
+			        System.out.println("\nInvalid Input!");
+			    }
+			
+			}
+			
+	}while(again.equalsIgnoreCase("y"));
+			
+	}	
+		
+		//	1. Input Values
+		static void InputVal(){
+		    	    	
+			while(true)
+			{
+
+				try {
+
+					System.out.print("\nEnter how many elements to store: ");
+				    int elements = scan.nextInt();
+				    scan.nextLine();
+			    
+				    System.out.println();
+				
+					if(elements>0 && elements<=10)
+				    {
+							
+						for(int i =0; i<elements; i++)
+						 {	                        
+			                  while(true)
+			                  {
+			                            
+			                      try{
+		      						System.out.printf("Enter value %d: ",(i+1));
+	        					values[i] = scan.nextInt();
+	       						scan.nextLine();
+	        						
+	        					if(values[i]<=0){
+	        					    System.out.println("\nInvalid Input\n");
+	        					   continue;
+	        					}else {
+	       
+	        					i++;
+	        			    
+	        					 if(i==elements){
+	        					    break;
+	        					 }
+	        					 	continue;						    
+	        					}
+	        						
+	        						
+	                       	}catch(InputMismatchException e){             
+	                           scan.nextLine();
+	                           System.out.println("\nERROR: InputMismatchException!\n");
+	                        }
+	                        
+	                  }
+
+				 }
+				//	count++;
+					count = elements;
+					break;
+						
+			 	}else if(elements>values.length){
+					    System.out.println("\nInvalid Input 1-10 only!\n");
+				}else {
+						
+					if(elements<=0 || elements==-0) {
+						System.out.println("\nInvalid Input\n");
+						continue;
+					}
+	
+				}			
+
+			}catch(InputMismatchException e) {
+	         scan.nextLine();
+	         System.out.println("\nERROR: InputMismatchException\n");
+			}		
+
+			}
+			
+		}
+		
+		
+		//2. Find Maximum Value
+		static void FindMax(){
+			    
+			    if(count==0){
+			        System.out.println("\nPlease input values first to get Maximum value.");
+			        return;
+			    }
+		    	    
+			    
+			    int max= values[0];
+			 for(int i =1; i<count; i++) {			
+							//Find maximum value
+							if(values[i]>max) {
+								max = values[i];
+							}		
+						}
+				System.out.println("\nMaximum value of array is: "+max);		
+
+			    
+			}
+			
+		
+		  //3. Find Minimum Value
+		  static void FindMin(){
+		   
+		       if(count==0){
+			        System.out.println("\nPlease input value first to get Minimum value.");
+			        return;
+			    }	  
+   		    
+			  int min= values[0];
+			  
+			 for(int i =1; i<count; i++) {			
+				 //Find minimum value
+				
+				if(values[i]<min) {
+					min = values[i];
+				}		
+	    	
+			 }
+			
+			 System.out.println("\nMinimum value of array is: "+min);				    
+			
+		  }
+		    
+		    	    
+		  //4. Calculate Sum 	    
+		  static void CalculateSum(){		    
+		    
+		   if(count==0){
+			        System.out.println("\nNo values in the array to calculate sum.");
+			        return;
+			    }
+		    	    
+		    
+			  int sum=0;
+			  
+			 for(int i =0; i<count; i++) {			
+	                sum+=values[i];
+	       	 }
+				System.out.println("\nSum of array values is:  "+sum);				    
+		
+	    	}	    
+		    
+		//5. Search Array
+		static void SearchArray(){		    		
+						
+			
+		       if(count==0){
+			        System.out.println("\nPlease input number first before searching values");
+			        return;
+			   }
+		       
+		       	boolean Find = false;
+		    	boolean Exc= true;
+		    	
+		    	System.out.println("\n  VALUE EXIST: ");
+				for(int i =0; i<count; i++) {
+					System.out.printf(" %s | ",values[i]);
+				}
+					
+				System.out.println("\n\n--- \u001B[32mSearch Array\u001B[0m ---\n");					
+		    
+	
+		       while(Exc){
+		            
+				try{
+						   					
+	        		System.out.print("Enter value to find: ");
+	       		    int FindVal = scan.nextInt();
+ 					scan.nextLine();
+	        					
+	        		for(int i = 0; i<count; i++) {
+	        							
+	        			if(values[i]==FindVal) {
+	       					Find = true;
+	          				Exc= false;
+	      					System.out.printf("%n %s is in the array%n",FindVal);
+	      						break;
+	        	    	}    
+	        		 }		
+										
+	        		if(!Find) {
+	        			Find = false;
+	        			Exc= false;
+	        			System.out.printf("%n %s is not existing in the array%n",FindVal);
+	        				break;	
+	        		}
+						
+				  }catch(InputMismatchException e){
+					  Exc=true;
+					  scan.nextLine();
+					  System.out.println("\nERROR: InputMismatchException\n");
+					  //  continue;
+					}
+						
+			 	}
+						    	    
+		   }
+		   
+	 //6. Display Values Forward
+	 static void DisplayValFward(){
+		       
+		       if(count==0){
+			        System.out.println("\nNo elements/values in the array to display(Forward).");
+			        return;
+			    }		 
+		       
+		       System.out.println("\n--- DISPLAY VALUES (Forward) ---\n");
+
+		       //Display values Forward
+		       for(int i =0; i<count; i++) {
+				System.out.print(values[i]+ "  ");
+		       }       
+	 } 
+		   
+		   
+	 //7. Display Values Backward
+	static void DisplayValBward(){
+		    	    
+		    	 if(count==0){
+			        System.out.println("\nNo elements/values in the array to display(Backward).");
+			        return;
+			    }
+		    	    	    	   	    	    	    	    
+		   	    System.out.println("\n--- DISPLAY VALUES (Backward) ---\n");
+
+				//Display values Backward
+				for(int i =count-1; i>=0; i--) {
+					System.out.print(values[i]+ "  ");
+				}					  	    
+						
+	}
+		   
+		   
+	   //8. Delete Values in the array
+	  static void DeleteValues(){
+		    	    
+		     if(count==0){
+	   	        System.out.println("\nPlease input value first before deleting\n");
+	   	        return;
+		     }
+		     
+		     boolean isFound=false;
+	         boolean NumException=true;
+	               
+	         
+	         	System.out.println("\n  VALUE EXIST: ");
+				for(int i =0; i<count; i++) {
+					System.out.printf(" %s | ",values[i]);
+				}
+				
+		   	 System.out.println("\n\n--- DELETE ITEM ---\n");
+
+		   	 while(NumException){			
+				  
+				try{
+		    
+					System.out.print("Enter value to delete: ");
+					int indexDel = Integer.parseInt(scan.nextLine());
+					
+					
+					for(int i =0; i<count; i++) {					
+
+						if(indexDel==values[i]) 
+						{     
+						    isFound= true;               												                             
+                            NumException= false;
+                            
+                            //Shifting elements once deleted
+	                        for(int j=i; j<count; j++){                                   
+	                           values[j] =values[j+1];                                                                        
+	                        }
+	                        //values[values.length-1]=0; 
+	                        
+	                        //increment the value of count to remove specific number
+	                        count--;
+	                        
+	 						System.out.printf("%nNumber %s is in the array %n %n\u001B[32mSuccessfully deleted!\u001B[0m",indexDel);
+							
+						}
+				
+					}
+							
+					if(!isFound){
+						NumException= false;
+					    System.out.printf("%nNumber %s is not in the array %n",indexDel);
+					}	    	   	    	    	   
+							
+		         }catch(NumberFormatException e){
+		             NumException= true;
+		             System.out.println("\nERROR: NumberFormatException\n");
+		         }
+			}
+		   	 
+		    	    	    
+		   }
+		   
+	 //9. Inserting Values
+	 static void InsertValues(){
+		    	    
+			   if(count==0){
+		          System.out.println("\nPlease input value first before inserting number\n");
+	              return;
+	           }    
+		    	    
+			   if(count<values.length){
+		    	        
+				   System.out.println("\n \u001B[32m--- INSERT VALUE ---\u001B[0m \n");
+			   	   while(true){
+			  
+			   		  try{
+			    	            
+		            	   System.out.print("\nEnter value to insert: ");
+		            	   int add = scan.nextInt();
+		            	   scan.nextLine();
+		            	    	    
+		           	    	if(add<=0){
+		           	    		System.out.println("\nInvalid Input\n");
+		           	    	}else
+		           	    	{	      	    
+		           	    		values[count] = add;
+		            	        count++;
+		            	   	    System.out.printf("%n %s \u001B[32mSuccessfully inserted! \u001B[0m%n",add);	   
+		            	   	    break; 	    	       
+		        	        }
+		        	    	    
+			   		   	}catch(InputMismatchException e){
+			   		   		scan.nextLine();
+			    	        System.out.println("\n\u001B[31mERROR: InputMismatchException\u001B[0m\n");
+			   		   	}
+			    	        
+			   	   	}
+		    	    
+			   	}else System.out.println("\nArray is full\n");
+		    	    	  
+			   
+	}	
+}

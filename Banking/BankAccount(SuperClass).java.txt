@@ -1,0 +1,44 @@
+package dsaAct;
+
+public class BankAccount {
+	
+	//Attribute
+	/*private*/protected double balance; 
+
+	//Constructors
+	public BankAccount() {
+		balance = 0.0;
+	}
+	
+	public BankAccount(double balance) {
+		this.balance = balance;
+	}
+	
+	public void Deposit(double amount) {
+		
+		if(amount>0)  balance+=amount;
+	
+	}
+	
+	public void Withdraw(double amount) {
+		
+		if(amount>0 && balance>=amount)	balance-=amount;
+		/*else { System.out.println("\nInsufficient Balance");	}*/		
+	}
+	
+	//get (Accessor)
+	public double getBalance() {
+		return balance;
+	}
+	
+	public void Transfer(double amount, BankAccount transf) {
+		
+		if(amount>0 && getBalance()>amount) {
+			Withdraw(amount);
+			transf.Deposit(amount);
+		}else System.out.println("\nTransfer Failed: Insufficient Funds!");
+		
+		
+	}
+
+}
